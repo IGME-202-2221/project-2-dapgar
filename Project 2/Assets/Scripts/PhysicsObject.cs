@@ -10,6 +10,7 @@ public class PhysicsObject : MonoBehaviour
     public Vector3 position = Vector3.zero;
     
     [SerializeField] float mass = 1f;
+    [SerializeField] public float radius;
 
     [SerializeField] bool useGravity = true;
     Vector3 gravity = Vector3.down;
@@ -17,8 +18,18 @@ public class PhysicsObject : MonoBehaviour
     [SerializeField] bool useFriction = true;
     [SerializeField] float coeff = 1f;
 
-    float camHeight;
-    float camWidth;
+    private float camHeight;
+    private float camWidth;
+
+    public float CamHeight
+    {
+        get { return camHeight; }
+    }
+
+    public float CamWidth
+    {
+        get { return camWidth; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +38,8 @@ public class PhysicsObject : MonoBehaviour
 
         camHeight = Camera.main.orthographicSize * 2f;
         camWidth = camHeight * Camera.main.aspect;
+
+        direction = Random.insideUnitCircle.normalized;
     }
 
     // Update is called once per frame
@@ -56,6 +69,8 @@ public class PhysicsObject : MonoBehaviour
 
         // Zero out acceleration
         acceleration = Vector3.zero;
+
+        Quaternion.LookRotation(direction);
     }
 
     public void ApplyForce(Vector3 force)
@@ -92,5 +107,10 @@ public class PhysicsObject : MonoBehaviour
         {
             velocity.x *= -1;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

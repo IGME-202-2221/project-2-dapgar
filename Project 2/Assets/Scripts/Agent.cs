@@ -28,7 +28,7 @@ public abstract class Agent : MonoBehaviour
         physicsObj.ApplyForce(totalSteeringForce);
     }
 
-    protected Vector3 Seek(Vector3 targetPos, float weight = 1f)
+    protected Vector3 Seek(Vector3 targetPos)
     {
         Vector3 desiredVel = targetPos - transform.position;
         desiredVel = desiredVel.normalized * maxSpeed;
@@ -37,7 +37,7 @@ public abstract class Agent : MonoBehaviour
         return seekForce;
     }
 
-    protected Vector3 Flee(Vector3 targetPos, float weight = 1f)
+    protected Vector3 Flee(Vector3 targetPos)
     {
         Vector3 desiredVel = transform.position - targetPos;
         desiredVel = desiredVel.normalized * maxSpeed;
@@ -46,7 +46,7 @@ public abstract class Agent : MonoBehaviour
         return fleeForce;
     }
 
-    protected void Wander(float weight = 1f)
+    protected void Wander()
     {
         // Update the angle of out current wander
         float maxWanderChange = maxWanderChangePerSecond * Time.deltaTime;
@@ -57,10 +57,10 @@ public abstract class Agent : MonoBehaviour
         Vector3 wanderTarget = Quaternion.Euler(0, 0, wanderAngle) * physicsObj.direction.normalized + physicsObj.position;
 
         // Seek towards our wander position
-        totalSteeringForce += Seek(wanderTarget, weight);
+        totalSteeringForce += Seek(wanderTarget);
     }
 
-    protected void StayInBounds(float weight = 1f)
+    protected void StayInBounds()
     {
         // Get position
         Vector3 futurePosition = GetFuturePosition();
@@ -70,7 +70,7 @@ public abstract class Agent : MonoBehaviour
             futurePosition.y > physicsObj.CamHeight || futurePosition.y < -physicsObj.CamHeight)
         {
             // If OOB
-            Seek(Vector3.zero, weight);
+            Seek(Vector3.zero);
         }
     }
 
