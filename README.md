@@ -23,69 +23,66 @@ _An attack on humans by the symbiotes! Find cures to free infected humans, use l
 
 _The most common enemy, able to be frozen in place through loud noise._
 
-### _Human_
-
-**Objective:** _To run and survive the onslaught of symbiotes._
-
-#### Steering Behaviors
-
-- _Flee, Separate_
-   - _eg, Flee - nearest Symbiote_
-- Obstacles - _Walls_
-- Seperation - _Humans_
-   
-#### State Transistions
-
-- _List all the ways this agent can transition to this state_
-   - _eg, When this agent gets within range of Agent2_
-   - _eg, When this agent has reached target of State2_
-   
-### _Infected_
+### Hunting
 
 **Objective:** _Attack and infect the remaining humans._
 
 #### Steering Behaviors
 
-- _Seek, Separate_
+- _Seek_
     - _eg, Seek - nearest Human
+- Obstacles - _Walls, Fire_
+- Seperation - _None_
+   
+#### State Transistions
+
+- _When in range of a human._
+
+### _Searching_
+
+**Objective:** _Searching for Humans to infect. (Wander)_
+
+#### Steering Behaviors
+
+- _Separate, Wander_
 - Obstacles - _Walls, Fire_
 - Seperation - _Symbiotes_
    
 #### State Transistions
 
-- _Collisions with Symbiotes._
+- _When out of range of a Human_
+   
+## _Human_
 
-## _Agent 2 Name_
+_Hopes to survive against the symbiotes._
 
-_A brief explanation of this agent._
+### _Flee_
 
-### _State 1 Name_
-
-**Objective:** _A brief explanation of this state's objective._
+**Objective:** _To escape the symbiotes grasp._
 
 #### Steering Behaviors
 
-- _List all behaviors used by this state_
-- Obstacles - _List all obstacle types this state avoids_
-- Seperation - _List all agents this state seperates from_
+- _Flee_
+- Obstacles - _Walls_
+- Seperation - _None_
    
 #### State Transistions
 
-- _List all the ways this agent can transition to this state_
+- _When in range/being Hunted by a symbiote._
    
-### _State 2 Name_
+### _Idle_
 
-**Objective:** _A brief explanation of this state's objective._
+**Objective:** _A small break from the chaos._
 
 #### Steering Behaviors
 
-- _List all behaviors used by this state_
-- Obstacles - _List all obstacle types this state avoids_
-- Seperation - _List all agents this state seperates from_
+- _Separate, Wander_
+- Obstacles - _Walls_
+- Seperation - _Humans_
    
 #### State Transistions
 
-- _List all the ways this agent can transition to this state_
+- _When out of range of a symbiote._
 
 ## Sources
 
@@ -95,8 +92,11 @@ _A brief explanation of this agent._
 ## Make it Your Own
 
 - _List out what you added to your game to make it different for you_
-- _If you will add more agents or states make sure to list here and add it to the documention above_
-- _If you will add your own assets make sure to list it here and add it to the Sources section
+- _Player agent_
+    - _Controllable agent_
+    - _Collect's cures to use on symbiotes_
+    - _Can be infected, then swaps teams(?)_
+- _Time-based (Survive 2mins to win etc.)_
 
 ## Known Issues
 
