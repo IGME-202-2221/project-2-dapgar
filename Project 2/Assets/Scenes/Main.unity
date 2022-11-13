@@ -242,6 +242,7 @@ MonoBehaviour:
   agents: []
   maxPosition: {x: 1, y: 1}
   minPosition: {x: 1, y: 1}
+  currentItPlayer: {fileID: 0}
 --- !u!4 &954847533
 Transform:
   m_ObjectHideFlags: 0

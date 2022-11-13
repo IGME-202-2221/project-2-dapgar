@@ -137,9 +137,9 @@ MonoBehaviour:
   mass: 2
   radius: 0.25
   useGravity: 0
-  useFriction: 0
+  useFriction: 1
   coeff: 0.7
-  bounceOffWalls: 1
+  bounceOffWalls: 0
 --- !u!114 &7389243128402789303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,6 +157,10 @@ MonoBehaviour:
   maxForce: 5
   maxWanderAngle: 45
   maxWanderChangePerSecond: 5
-  personalSpace: 1.5
+  personalSpace: 0.75
   countForTime: 10
-  spriteRenderer: {fileID: 0}
+  visionDistance: 6
+  spriteRenderer: {fileID: 1418695418805260220}
+  itSprite: {fileID: 21300000, guid: 7e7edead41a9c9d49ad8bf70b8afb4a2, type: 3}
+  notitSprite: {fileID: 21300000, guid: 418a4a23ffd89df4ba380aaa6925598d, type: 3}
+  countingSprite: {fileID: 21300000, guid: 9738eb933b58afd4395dc76f06be568c, type: 3}

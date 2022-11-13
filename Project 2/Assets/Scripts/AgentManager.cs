@@ -20,7 +20,12 @@ public class AgentManager : MonoBehaviour
     [HideInInspector]
     public Vector2 minPosition = Vector2.one;
 
+    float camWidth;
+    float camHeight;
+
     float edgePadding = 1f;
+
+    public TagPlayer currentItPlayer;
 
     private void Awake()
     {
@@ -33,15 +38,14 @@ public class AgentManager : MonoBehaviour
 
         if (cam != null)
         {
-            Vector3 camPos = cam.transform.position;
-            float halfHeight = cam.orthographicSize;
-            float halfWidth = halfHeight * cam.aspect;
+            camHeight = cam.orthographicSize;
+            camWidth = camHeight * cam.aspect;
 
-            maxPosition.x = camPos.x + halfWidth * 2 - edgePadding;
-            maxPosition.y = camPos.y + halfHeight * 2 - edgePadding;
+            maxPosition.x = camWidth - edgePadding;
+            maxPosition.y = camHeight - edgePadding;
 
-            minPosition.x = camPos.x - halfWidth * 2 + edgePadding;
-            minPosition.y = camPos.y - halfHeight * 2 + edgePadding;
+            minPosition.x = -camWidth + edgePadding;
+            minPosition.y = -camHeight + edgePadding;
         }
     }
 
@@ -51,16 +55,36 @@ public class AgentManager : MonoBehaviour
         for (int i = 0; i < agentSpawnCount; i++)
         {
             Vector3 rand = new Vector3(
-                Random.Range(minPosition.x + 1, maxPosition.x - 1),
-                Random.Range(minPosition.y + 1, maxPosition.y - 1));
-            agents.Add(Instantiate(agentPrefab));//, rand, Quaternion.identity));
+                Random.Range(camWidth, -camWidth),
+                Random.Range(camHeight, -camHeight));
+            agents.Add(Instantiate(agentPrefab, rand, Quaternion.identity));
         }
+
+        agents[0].GetComponent<TagPlayer>().Tag();
     }
 
-    /*public void TagPlayer(int newItIndex)
+    public TagPlayer GetClosestTagPlayer(TagPlayer sourcePlayer)
     {
-        ((TagPlayer)agents[newItIndex]).ChangeStateTo(TagState.Counting);
-        currentIndex = newItIndex;
+        float minDistance = float.MaxValue;
+        Agent closestPlayer = null;
+
+        foreach (Agent other in agents)
+        {
+            float sqrDistance = Vector3.SqrMagnitude(sourcePlayer.physicsObj.position - other.physicsObj.position);
+
+            if (sqrDistance < float.Epsilon)
+            {
+                // this is the sourcePlayer
+                continue;
+            }
+
+            if (sqrDistance < minDistance)
+            {
+                closestPlayer = other;
+                minDistance = sqrDistance;
+            }
+        }
+
+        return closestPlayer.GetComponent<TagPlayer>();
     }
-    */
 }
