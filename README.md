@@ -30,11 +30,11 @@ _The most common enemy, able to be frozen in place through loud noise._
 #### Steering Behaviors
 
 - _Seek_
-    - _eg, Seek - nearest Human
+    - _Nearest Human_
 - Obstacles - _Walls, Fire_
 - Seperation - _None_
    
-#### State Transistions
+#### State Transitions
 
 - _When in range of a human._
 
@@ -48,7 +48,7 @@ _The most common enemy, able to be frozen in place through loud noise._
 - Obstacles - _Walls, Fire_
 - Seperation - _Symbiotes_
    
-#### State Transistions
+#### State Transitions
 
 - _When out of range of a Human_
    
@@ -63,10 +63,11 @@ _Hopes to survive against the symbiotes._
 #### Steering Behaviors
 
 - _Flee_
+    - _Nearest Symbiote_
 - Obstacles - _Walls_
 - Seperation - _None_
    
-#### State Transistions
+#### State Transitions
 
 - _When in range/being Hunted by a symbiote._
    
@@ -80,7 +81,7 @@ _Hopes to survive against the symbiotes._
 - Obstacles - _Walls_
 - Seperation - _Humans_
    
-#### State Transistions
+#### State Transitions
 
 - _When out of range of a symbiote._
 
