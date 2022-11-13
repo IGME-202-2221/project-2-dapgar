@@ -11,7 +11,7 @@ _REPLACE OR REMOVE EVERYTING BETWEEN "\_"_
 
 ## Simulation Design
 
-_A brief explanation of your simulation._
+_An attack on humans by the symbiotes! Find cures to free infected humans, use loud sound to stun the symbiotes, and most of all, survive!_
 
 ### Controls
 
@@ -19,21 +19,20 @@ _A brief explanation of your simulation._
     -   _Include how to preform each action ( keyboard, mouse, UI Input )_
     -   _Include what impact an action has in the simulation ( if is could be unclear )_
 
-## _Agent 1 Name_
+## _Black Symbiote_
 
-_A brief explanation of this agent._
+_The most common enemy, able to be frozen in place through loud noise._
 
-### _State 1 Name_
+### _Human_
 
-**Objective:** _A brief explanation of this state's objective._
+**Objective:** _To run and survive the onslaught of symbiotes._
 
 #### Steering Behaviors
 
-- _List all behaviors used by this state_
-   - _If behavior has input data list it here_
-   - _eg, Flee - nearest Agent2_
-- Obstacles - _List all obstacle types this state avoids_
-- Seperation - _List all agents this state seperates from_
+- _Flee, Separate_
+   - _eg, Flee - nearest Symbiote_
+- Obstacles - _Walls_
+- Seperation - _Humans_
    
 #### State Transistions
 
@@ -41,19 +40,20 @@ _A brief explanation of this agent._
    - _eg, When this agent gets within range of Agent2_
    - _eg, When this agent has reached target of State2_
    
-### _State 2 Name_
+### _Infected_
 
-**Objective:** _A brief explanation of this state's objective._
+**Objective:** _Attack and infect the remaining humans._
 
 #### Steering Behaviors
 
-- _List all behaviors used by this state_
-- Obstacles - _List all obstacle types this state avoids_
-- Seperation - _List all agents this state seperates from_
+- _Seek, Separate_
+    - _eg, Seek - nearest Human
+- Obstacles - _Walls, Fire_
+- Seperation - _Symbiotes_
    
 #### State Transistions
 
-- _List all the ways this agent can transition to this state_
+- _Collisions with Symbiotes._
 
 ## _Agent 2 Name_
 
