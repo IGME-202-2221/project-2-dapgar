@@ -18,6 +18,8 @@ public class PhysicsObject : MonoBehaviour
     [SerializeField] bool useFriction = true;
     [SerializeField] float coeff = 1f;
 
+    [SerializeField] bool bounceOffWalls;
+
     private float camHeight;
     private float camWidth;
 
@@ -36,7 +38,7 @@ public class PhysicsObject : MonoBehaviour
     {
         position = transform.position;
 
-        camHeight = Camera.main.orthographicSize * 2f;
+        camHeight = Camera.main.orthographicSize * 2;
         camWidth = camHeight * Camera.main.aspect;
 
         direction = Random.insideUnitCircle.normalized;
@@ -45,9 +47,11 @@ public class PhysicsObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Bounce();
+        if (bounceOffWalls)
+        {
+            Bounce();
+        }
 
-        // Calc gravity
         if (useGravity)
         {
             ApplyGravity();
@@ -62,15 +66,19 @@ public class PhysicsObject : MonoBehaviour
         velocity += acceleration * Time.deltaTime;
         position += velocity * Time.deltaTime;
 
-        // Grab current direction from velocity
-        direction = velocity.normalized;
+        if (velocity.sqrMagnitude > Mathf.Epsilon)
+        {
+            // Grab current direction from velocity
+            direction = velocity.normalized;
+        }
 
         transform.position = position;
 
         // Zero out acceleration
         acceleration = Vector3.zero;
 
-        Quaternion.LookRotation(direction);
+        // Handle rotation
+        transform.rotation = Quaternion.LookRotation(Vector3.back, direction);
     }
 
     public void ApplyForce(Vector3 force)

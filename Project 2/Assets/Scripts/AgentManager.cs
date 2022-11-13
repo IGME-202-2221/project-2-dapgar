@@ -6,7 +6,7 @@ public class AgentManager : MonoBehaviour
 {
     [SerializeField] Agent agentPrefab;
 
-    List<Sprite> sprites = new List<Sprite> ();
+    List<SpriteRenderer> sprites = new List<SpriteRenderer> ();
 
     [SerializeField] int agentSpawnCount;
 
@@ -30,11 +30,12 @@ public class AgentManager : MonoBehaviour
         for (int i = 0; i < agentSpawnCount; i++)
         {
             agents.Add(Instantiate(agentPrefab));
+            sprites.Add(agents[i].GetComponent<SpriteRenderer>());
 
             //agents[i].Init(this);
         }
 
-        TagPlayer(0);
+        //TagPlayer(0);
     }
 
     public void TagPlayer(int newItIndex)

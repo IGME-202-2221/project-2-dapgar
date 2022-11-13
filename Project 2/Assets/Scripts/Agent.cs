@@ -5,12 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(PhysicsObject))]
 public abstract class Agent : MonoBehaviour
 {
-    [SerializeField] protected PhysicsObject physicsObj;
+    public PhysicsObject physicsObj;
 
-    [SerializeField] float maxSpeed = 2f;
-    [SerializeField] float maxForce = 2f;
+    [SerializeField] float maxSpeed = 5f;
+    [SerializeField] float maxForce = 5f;
 
-    protected Vector3 totalSteeringForce;
+    protected Vector3 totalSteeringForce = Vector3.zero;
 
     private float wanderAngle = 0f;
     public float maxWanderAngle = 45f;
@@ -18,32 +18,41 @@ public abstract class Agent : MonoBehaviour
 
     protected abstract void CalcSteeringForces();
 
+    private void Awake()
+    {
+        if (physicsObj == null)
+        {
+            physicsObj = GetComponent<PhysicsObject>();
+        }
+    }
+
     protected virtual void Update()
     {
-        totalSteeringForce = Vector3.zero;
         CalcSteeringForces();
 
         // Limits total forces.
         totalSteeringForce = Vector3.ClampMagnitude(totalSteeringForce, maxForce);
         physicsObj.ApplyForce(totalSteeringForce);
+
+        totalSteeringForce = Vector3.zero;
     }
 
-    protected Vector3 Seek(Vector3 targetPos)
+    protected void Seek(Vector3 targetPos, float weight = 1f)
     {
-        Vector3 desiredVel = targetPos - transform.position;
+        Vector3 desiredVel = targetPos - physicsObj.position;
         desiredVel = desiredVel.normalized * maxSpeed;
 
         Vector3 seekForce = desiredVel - physicsObj.velocity;
-        return seekForce;
+        totalSteeringForce += seekForce * weight;
     }
 
-    protected Vector3 Flee(Vector3 targetPos)
+    protected void Flee(Vector3 targetPos, float weight = 1f)
     {
-        Vector3 desiredVel = transform.position - targetPos;
+        Vector3 desiredVel = physicsObj.position - targetPos;
         desiredVel = desiredVel.normalized * maxSpeed;
 
         Vector3 fleeForce = desiredVel - physicsObj.velocity;
-        return fleeForce;
+        totalSteeringForce += fleeForce * weight;
     }
 
     protected void Wander()
@@ -57,7 +66,7 @@ public abstract class Agent : MonoBehaviour
         Vector3 wanderTarget = Quaternion.Euler(0, 0, wanderAngle) * physicsObj.direction.normalized + physicsObj.position;
 
         // Seek towards our wander position
-        totalSteeringForce += Seek(wanderTarget);
+        Seek(wanderTarget);
     }
 
     protected void StayInBounds()
