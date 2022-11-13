@@ -4,24 +4,45 @@ using UnityEngine;
 
 public class AgentManager : MonoBehaviour
 {
-    [SerializeField] Agent agentPrefab;
+    public static AgentManager Instance;
 
-    List<SpriteRenderer> sprites = new List<SpriteRenderer> ();
+    [SerializeField] Agent agentPrefab;
+    [SerializeField] TagPlayer tagPlayerPrefab;
 
     [SerializeField] int agentSpawnCount;
 
-    List<Agent> agents = new List<Agent>();
+    [HideInInspector]
+    public List<Agent> agents = new List<Agent>();
 
-    public List<Agent> Agents
+    [HideInInspector]
+    public Vector2 maxPosition = Vector2.one;
+
+    [HideInInspector]
+    public Vector2 minPosition = Vector2.one;
+
+    float edgePadding = 1f;
+
+    private void Awake()
     {
-        get { return agents; }
-    }
+        if (Instance == null)
+        {
+            Instance = this;
+        }
 
-    int currentIndex;
+        Camera cam = Camera.main;
 
-    public int ItAgentIndex
-    {
-        get { return currentIndex; }
+        if (cam != null)
+        {
+            Vector3 camPos = cam.transform.position;
+            float halfHeight = cam.orthographicSize;
+            float halfWidth = halfHeight * cam.aspect;
+
+            maxPosition.x = camPos.x + halfWidth * 2 - edgePadding;
+            maxPosition.y = camPos.y + halfHeight * 2 - edgePadding;
+
+            minPosition.x = camPos.x - halfWidth * 2 + edgePadding;
+            minPosition.y = camPos.y - halfHeight * 2 + edgePadding;
+        }
     }
 
     // Start is called before the first frame update
@@ -29,18 +50,17 @@ public class AgentManager : MonoBehaviour
     {
         for (int i = 0; i < agentSpawnCount; i++)
         {
-            agents.Add(Instantiate(agentPrefab));
-            sprites.Add(agents[i].GetComponent<SpriteRenderer>());
-
-            //agents[i].Init(this);
+            Vector3 rand = new Vector3(
+                Random.Range(minPosition.x + 1, maxPosition.x - 1),
+                Random.Range(minPosition.y + 1, maxPosition.y - 1));
+            agents.Add(Instantiate(agentPrefab));//, rand, Quaternion.identity));
         }
-
-        //TagPlayer(0);
     }
 
-    public void TagPlayer(int newItIndex)
+    /*public void TagPlayer(int newItIndex)
     {
         ((TagPlayer)agents[newItIndex]).ChangeStateTo(TagState.Counting);
         currentIndex = newItIndex;
     }
+    */
 }

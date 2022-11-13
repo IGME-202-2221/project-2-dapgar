@@ -19,6 +19,7 @@ public class TagPlayer : Agent
 
     protected override void CalcSteeringForces()
     {
+        /*
         switch (currentState)
         {
             case TagState.NotIt:
@@ -48,6 +49,10 @@ public class TagPlayer : Agent
                 }
                 break;
         }
+        */
+        Wander();
+        StayInBounds(3f);
+        Separate(AgentManager.Instance.agents);
 
     }
 

@@ -16,6 +16,8 @@ public abstract class Agent : MonoBehaviour
     public float maxWanderAngle = 45f;
     public float maxWanderChangePerSecond = 10f;
 
+    public float personalSpace = 1f;
+
     protected abstract void CalcSteeringForces();
 
     private void Awake()
@@ -69,22 +71,55 @@ public abstract class Agent : MonoBehaviour
         Seek(wanderTarget);
     }
 
-    protected void StayInBounds()
+    protected void Separate<T>(List<T> agents) where T : Agent
+    {
+        float sqrPersonalSpace = Mathf.Pow(personalSpace, 2);
+
+        // Loop through all agents
+        foreach (T other in agents)
+        {
+            float sqrDist = Vector3.SqrMagnitude(other.physicsObj.position - physicsObj.position);
+
+            if (sqrDist < float.Epsilon)
+            {
+                continue;
+            }
+
+            if (sqrDist < sqrPersonalSpace)
+            {
+                float weight = sqrPersonalSpace / (sqrDist + 0.1f);
+                Flee(other.physicsObj.position, weight);
+            }
+        }
+    }
+
+    protected void StayInBounds(float weight = 1f)
     {
         // Get position
         Vector3 futurePosition = GetFuturePosition();
 
         // Check position
-        if (futurePosition.x > physicsObj.CamWidth || futurePosition.x < -physicsObj.CamWidth ||
-            futurePosition.y > physicsObj.CamHeight || futurePosition.y < -physicsObj.CamHeight)
+        if (futurePosition.x > AgentManager.Instance.maxPosition.x || 
+            futurePosition.x < AgentManager.Instance.minPosition.x ||
+            futurePosition.y > AgentManager.Instance.maxPosition.y ||
+            futurePosition.y < AgentManager.Instance.minPosition.y)
         {
             // If OOB
-            Seek(Vector3.zero);
+            Seek(Vector3.zero, weight);
         }
     }
 
     public Vector3 GetFuturePosition(float timeToLookAhead = 1f)
     {
         return physicsObj.position + physicsObj.velocity * timeToLookAhead;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, physicsObj.radius);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, personalSpace);
     }
 }

@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1418695420676645871}
   - component: {fileID: 1418695420676645870}
-  - component: {fileID: -4454424878238303249}
+  - component: {fileID: 7389243128402789303}
   m_Layer: 0
   m_Name: Greeny
   m_TagString: Untagged
@@ -134,13 +134,13 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
-  mass: 1
-  radius: 0
+  mass: 2
+  radius: 0.25
   useGravity: 0
   useFriction: 0
-  coeff: 1
+  coeff: 0.7
   bounceOffWalls: 1
---- !u!114 &-4454424878238303249
+--- !u!114 &7389243128402789303
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,13 +149,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1418695420676645857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89e5b323b9ba2704a97e94d94889ae02, type: 3}
+  m_Script: {fileID: 11500000, guid: fa9705ef27228e8499d717078ad9b9d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   physicsObj: {fileID: 1418695420676645870}
-  maxSpeed: 5
+  maxSpeed: 3
   maxForce: 5
   maxWanderAngle: 45
-  maxWanderChangePerSecond: 10
-  target: {fileID: 0}
-  manager: {fileID: 0}
+  maxWanderChangePerSecond: 5
+  personalSpace: 1.5
+  countForTime: 10
+  spriteRenderer: {fileID: 0}

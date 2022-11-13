@@ -20,26 +20,10 @@ public class PhysicsObject : MonoBehaviour
 
     [SerializeField] bool bounceOffWalls;
 
-    private float camHeight;
-    private float camWidth;
-
-    public float CamHeight
-    {
-        get { return camHeight; }
-    }
-
-    public float CamWidth
-    {
-        get { return camWidth; }
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         position = transform.position;
-
-        camHeight = Camera.main.orthographicSize * 2;
-        camWidth = camHeight * Camera.main.aspect;
 
         direction = Random.insideUnitCircle.normalized;
     }
@@ -105,13 +89,13 @@ public class PhysicsObject : MonoBehaviour
 
     void Bounce()
     {
-        if (transform.position.y <= -camHeight / 2 ||
-            transform.position.y >= camHeight / 2)
+        if (transform.position.y <= AgentManager.Instance.minPosition.y / 2 ||
+            transform.position.y >= AgentManager.Instance.maxPosition.y / 2)
         {
             velocity.y *= -1;
         }
-        if (transform.position.x <= -camWidth / 2 ||
-            transform.position.x >= camWidth / 2)
+        if (transform.position.x <= AgentManager.Instance.minPosition.x / 2 ||
+            transform.position.x >= AgentManager.Instance.maxPosition.x / 2)
         {
             velocity.x *= -1;
         }

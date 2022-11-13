@@ -8,7 +8,7 @@ public class Fleer : Agent
 
     private void Start()
     {
-        manager = GameObject.FindGameObjectWithTag("AgentManager").GetComponent<AgentManager>();
+        manager = AgentManager.Instance;
     }
 
     protected override void CalcSteeringForces()
@@ -21,9 +21,9 @@ public class Fleer : Agent
         float minDist = float.MaxValue;
         int nearestIndex = -1;
 
-        for (int i = 0; i < manager.Agents.Count; i++)
+        for (int i = 0; i < manager.agents.Count; i++)
         {
-            float dist = Vector3.Distance(transform.position, manager.Agents[i].transform.position);
+            float dist = Vector3.Distance(transform.position, manager.agents[i].transform.position);
 
             if (dist < minDist)
             {
@@ -35,7 +35,7 @@ public class Fleer : Agent
 
         if (nearestIndex != -1)
         {
-            return manager.Agents[nearestIndex].transform.position;
+            return manager.agents[nearestIndex].transform.position;
         }
         return Vector3.zero;
     }
