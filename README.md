@@ -11,7 +11,7 @@ _REPLACE OR REMOVE EVERYTING BETWEEN "\_"_
 
 ## Simulation Design
 
-_A brief explanation of your simulation._
+_An attack on humans by the symbiotes! Find cures to free infected humans, use loud sound to stun the symbiotes, and most of all, survive!_
 
 ### Controls
 
@@ -19,73 +19,71 @@ _A brief explanation of your simulation._
     -   _Include how to preform each action ( keyboard, mouse, UI Input )_
     -   _Include what impact an action has in the simulation ( if is could be unclear )_
 
-## _Agent 1 Name_
+## _Black Symbiote_
 
-_A brief explanation of this agent._
+_The most common enemy, able to be frozen in place through loud noise._
 
-### _State 1 Name_
+### Hunting
 
-**Objective:** _A brief explanation of this state's objective._
-
-#### Steering Behaviors
-
-- _List all behaviors used by this state_
-   - _If behavior has input data list it here_
-   - _eg, Flee - nearest Agent2_
-- Obstacles - _List all obstacle types this state avoids_
-- Seperation - _List all agents this state seperates from_
-   
-#### State Transistions
-
-- _List all the ways this agent can transition to this state_
-   - _eg, When this agent gets within range of Agent2_
-   - _eg, When this agent has reached target of State2_
-   
-### _State 2 Name_
-
-**Objective:** _A brief explanation of this state's objective._
+**Objective:** _Attack and infect the remaining humans._
 
 #### Steering Behaviors
 
-- _List all behaviors used by this state_
-- Obstacles - _List all obstacle types this state avoids_
-- Seperation - _List all agents this state seperates from_
+- _Seek_
+    - _Nearest Human_
+- Obstacles - _Walls, Fire_
+- Seperation - _None_
    
-#### State Transistions
+#### State Transitions
 
-- _List all the ways this agent can transition to this state_
+- _When in range of a human._
 
-## _Agent 2 Name_
+### _Searching_
 
-_A brief explanation of this agent._
-
-### _State 1 Name_
-
-**Objective:** _A brief explanation of this state's objective._
+**Objective:** _Searching for Humans to infect. (Wander)_
 
 #### Steering Behaviors
 
-- _List all behaviors used by this state_
-- Obstacles - _List all obstacle types this state avoids_
-- Seperation - _List all agents this state seperates from_
+- _Separate, Wander_
+- Obstacles - _Walls, Fire_
+- Seperation - _Symbiotes_
    
-#### State Transistions
+#### State Transitions
 
-- _List all the ways this agent can transition to this state_
+- _When out of range of a Human_
    
-### _State 2 Name_
+## _Human_
 
-**Objective:** _A brief explanation of this state's objective._
+_Hopes to survive against the symbiotes._
+
+### _Flee_
+
+**Objective:** _To escape the symbiotes grasp._
 
 #### Steering Behaviors
 
-- _List all behaviors used by this state_
-- Obstacles - _List all obstacle types this state avoids_
-- Seperation - _List all agents this state seperates from_
+- _Flee_
+    - _Nearest Symbiote_
+- Obstacles - _Walls_
+- Seperation - _None_
    
-#### State Transistions
+#### State Transitions
 
-- _List all the ways this agent can transition to this state_
+- _When in range/being Hunted by a symbiote._
+   
+### _Idle_
+
+**Objective:** _A small break from the chaos._
+
+#### Steering Behaviors
+
+- _Separate, Wander_
+- Obstacles - _Walls_
+- Seperation - _Humans_
+   
+#### State Transitions
+
+- _When out of range of a symbiote._
 
 ## Sources
 
@@ -95,8 +93,11 @@ _A brief explanation of this agent._
 ## Make it Your Own
 
 - _List out what you added to your game to make it different for you_
-- _If you will add more agents or states make sure to list here and add it to the documention above_
-- _If you will add your own assets make sure to list it here and add it to the Sources section
+- _Player agent_
+    - _Controllable agent_
+    - _Collect's cures to use on symbiotes_
+    - _Can be infected, then swaps teams(?)_
+- _Time-based (Survive 2mins to win etc.)_
 
 ## Known Issues
 

@@ -4,24 +4,49 @@ using UnityEngine;
 
 public class AgentManager : MonoBehaviour
 {
-    [SerializeField] Agent agentPrefab;
+    public static AgentManager Instance;
 
-    List<Sprite> sprites = new List<Sprite> ();
+    [SerializeField] Agent agentPrefab;
+    [SerializeField] TagPlayer tagPlayerPrefab;
 
     [SerializeField] int agentSpawnCount;
 
-    List<Agent> agents = new List<Agent>();
+    [HideInInspector]
+    public List<Agent> agents = new List<Agent>();
 
-    public List<Agent> Agents
+    [HideInInspector]
+    public Vector2 maxPosition = Vector2.one;
+
+    [HideInInspector]
+    public Vector2 minPosition = Vector2.one;
+
+    float camWidth;
+    float camHeight;
+
+    float edgePadding = 1f;
+
+    public TagPlayer currentItPlayer;
+
+    private void Awake()
     {
-        get { return agents; }
-    }
+        if (Instance == null)
+        {
+            Instance = this;
+        }
 
-    int currentIndex;
+        Camera cam = Camera.main;
 
-    public int ItAgentIndex
-    {
-        get { return currentIndex; }
+        if (cam != null)
+        {
+            camHeight = cam.orthographicSize;
+            camWidth = camHeight * cam.aspect;
+
+            maxPosition.x = camWidth - edgePadding;
+            maxPosition.y = camHeight - edgePadding;
+
+            minPosition.x = -camWidth + edgePadding;
+            minPosition.y = -camHeight + edgePadding;
+        }
     }
 
     // Start is called before the first frame update
@@ -29,17 +54,37 @@ public class AgentManager : MonoBehaviour
     {
         for (int i = 0; i < agentSpawnCount; i++)
         {
-            agents.Add(Instantiate(agentPrefab));
-
-            //agents[i].Init(this);
+            Vector3 rand = new Vector3(
+                Random.Range(camWidth, -camWidth),
+                Random.Range(camHeight, -camHeight));
+            agents.Add(Instantiate(agentPrefab, rand, Quaternion.identity));
         }
 
-        TagPlayer(0);
+        agents[0].GetComponent<TagPlayer>().Tag();
     }
 
-    public void TagPlayer(int newItIndex)
+    public TagPlayer GetClosestTagPlayer(TagPlayer sourcePlayer)
     {
-        ((TagPlayer)agents[newItIndex]).ChangeStateTo(TagState.Counting);
-        currentIndex = newItIndex;
+        float minDistance = float.MaxValue;
+        Agent closestPlayer = null;
+
+        foreach (Agent other in agents)
+        {
+            float sqrDistance = Vector3.SqrMagnitude(sourcePlayer.physicsObj.position - other.physicsObj.position);
+
+            if (sqrDistance < float.Epsilon)
+            {
+                // this is the sourcePlayer
+                continue;
+            }
+
+            if (sqrDistance < minDistance)
+            {
+                closestPlayer = other;
+                minDistance = sqrDistance;
+            }
+        }
+
+        return closestPlayer.GetComponent<TagPlayer>();
     }
 }
