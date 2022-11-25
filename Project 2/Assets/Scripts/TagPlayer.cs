@@ -18,6 +18,8 @@ public class TagPlayer : Agent
 
     public float visionDistance = 4f;
 
+    public float stayInBoundsWeight = 6f;
+
     public SpriteRenderer spriteRenderer;
 
     public Sprite itSprite;
@@ -84,7 +86,7 @@ public class TagPlayer : Agent
                 }
         }
         
-        StayInBounds(4f);
+        StayInBounds(stayInBoundsWeight);
     }
 
     public void StateTransition(TagState newState)

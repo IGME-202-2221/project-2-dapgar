@@ -62,7 +62,7 @@ public class PhysicsObject : MonoBehaviour
         acceleration = Vector3.zero;
 
         // Handle rotation
-        transform.rotation = Quaternion.LookRotation(Vector3.back, direction);
+        //transform.rotation = Quaternion.LookRotation(Vector3.back, direction);
     }
 
     public void ApplyForce(Vector3 force)
