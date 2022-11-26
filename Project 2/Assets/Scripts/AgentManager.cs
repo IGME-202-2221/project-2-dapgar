@@ -7,7 +7,6 @@ public class AgentManager : MonoBehaviour
     public static AgentManager Instance;
 
     [SerializeField] Agent agentPrefab;
-    [SerializeField] TagPlayer tagPlayerPrefab;
 
     [SerializeField] int agentSpawnCount;
 
@@ -23,9 +22,9 @@ public class AgentManager : MonoBehaviour
     float camWidth;
     float camHeight;
 
-    float edgePadding = 1f;
+    public float edgePadding = 0.3f;
 
-    public TagPlayer currentItPlayer;
+    public List<TagPlayer> currentSymbiotes = new List<TagPlayer>();
 
     private void Awake()
     {
@@ -72,7 +71,9 @@ public class AgentManager : MonoBehaviour
         {
             float sqrDistance = Vector3.SqrMagnitude(sourcePlayer.physicsObj.position - other.physicsObj.position);
 
-            if (sqrDistance < float.Epsilon)
+            if (sqrDistance < float.Epsilon || 
+                other.GetComponent<TagPlayer>().CurrentState == TagState.Infected ||
+                other.GetComponent<TagPlayer>().CurrentState == TagState.Transforming)
             {
                 // this is the sourcePlayer
                 continue;
