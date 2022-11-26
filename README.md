@@ -1,4 +1,4 @@
-# Project _NAME_
+# Project _Symbiote Invasion_
 
 [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet)
 
@@ -15,15 +15,17 @@ _An attack on humans by the symbiotes! Find cures to free infected humans, use l
 
 ### Controls
 
--   _List all of the actions the player can have in your simulation_
-    -   _Include how to preform each action ( keyboard, mouse, UI Input )_
-    -   _Include what impact an action has in the simulation ( if is could be unclear )_
+-   _Movement_
+    -   _WASD keys / Arrow keys_
+-   _Use Antidote_
+    -   _Left Click_
+    -   _Cures symbiotes, returning them to humans_
 
-## _Black Symbiote_
+## _Symbiote_
 
-_The most common enemy, able to be frozen in place through loud noise._
+_The most common enemy, luckily they cannot harm you if you are in a hazmat suit._
 
-### Hunting
+### Infected
 
 **Objective:** _Attack and infect the remaining humans._
 
@@ -31,64 +33,61 @@ _The most common enemy, able to be frozen in place through loud noise._
 
 - _Seek_
     - _Nearest Human_
-- Obstacles - _Walls, Fire_
-- Seperation - _None_
+- Obstacles - _Walls, Obstacles_
+- Seperation - _Other Symbiotes_
    
 #### State Transitions
 
-- _When in range of a human._
+- _After transitioning to a symbiote._
 
-### _Searching_
+### _Transitioning_
 
-**Objective:** _Searching for Humans to infect. (Wander)_
+**Objective:** _Transitioning to an infected (Frozen for x time)_
 
 #### Steering Behaviors
 
-- _Separate, Wander_
-- Obstacles - _Walls, Fire_
-- Seperation - _Symbiotes_
+- Separate
+- Obstacles - _Walls, Obstacles_
+- Separation - _Symbiotes, Humans_
    
 #### State Transitions
 
-- _When out of range of a Human_
+- _When first infected by a symbiote._
    
-## _Human_
+### _Human_
 
 _Hopes to survive against the symbiotes._
 
-### _Flee_
-
-**Objective:** _To escape the symbiotes grasp._
+**Objective:** _To flee away and survive the symbiotes._
 
 #### Steering Behaviors
 
 - _Flee_
     - _Nearest Symbiote_
 - Obstacles - _Walls_
-- Seperation - _None_
+- Separation - _Humans_
    
 #### State Transitions
 
-- _When in range/being Hunted by a symbiote._
+- _When either cured or by default._
    
-### _Idle_
+### _Curing_
 
-**Objective:** _A small break from the chaos._
+**Objective:** _Similar to transitioning, but returns symbiote into humans._
 
 #### Steering Behaviors
 
-- _Separate, Wander_
-- Obstacles - _Walls_
-- Seperation - _Humans_
+- _Separate_
+- Obstacles - _Walls, Obstacles_
+- Separation - _Humans, Symbiotes_
    
 #### State Transitions
 
-- _When out of range of a symbiote._
+- _When hit with an antidote._
 
 ## Sources
 
--   _List all project sources here –models, textures, sound clips, assets, etc._
--   _If an asset is from the Unity store, include a link to the page and the author’s name_
+-   _Assets custom made by myself, Dominic Apgar_
 
 ## Make it Your Own
 
@@ -96,8 +95,10 @@ _Hopes to survive against the symbiotes._
 - _Player agent_
     - _Controllable agent_
     - _Collect's cures to use on symbiotes_
-    - _Can be infected, then swaps teams(?)_
 - _Time-based (Survive 2mins to win etc.)_
+- _Custom assets/art_
+- _Twist on zombie-like survival_
+- _Custom steering behaviors_
 
 ## Known Issues
 
