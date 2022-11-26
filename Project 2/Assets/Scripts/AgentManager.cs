@@ -19,8 +19,8 @@ public class AgentManager : MonoBehaviour
     [HideInInspector]
     public Vector2 minPosition = Vector2.one;
 
-    float camWidth;
-    float camHeight;
+    public float camWidth;
+    public float camHeight;
 
     public float edgePadding = 0.3f;
 
@@ -59,7 +59,7 @@ public class AgentManager : MonoBehaviour
             agents.Add(Instantiate(agentPrefab, rand, Quaternion.identity));
         }
 
-        agents[0].GetComponent<TagPlayer>().Tag();
+        agents[3].GetComponent<TagPlayer>().Tag();
     }
 
     public TagPlayer GetClosestTagPlayer(TagPlayer sourcePlayer)

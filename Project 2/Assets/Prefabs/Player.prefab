@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5601487287507451276}
   - component: {fileID: 5601487287507451277}
+  - component: {fileID: -8858508867712362230}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -47,6 +48,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camWalls: {fileID: 0}
   moveSpeed: 2.3
+  spriteRenderer: {fileID: 5601487288765237709}
+--- !u!114 &-8858508867712362230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5601487287507451278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d05f08eb9b81c4a835494ac1f2b910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.25
 --- !u!1 &5601487288765237711
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +135,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 56cc8d52a9ab3664d829a193cf0038b1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5222e05aecbd16641af25f2a0a3ca525, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

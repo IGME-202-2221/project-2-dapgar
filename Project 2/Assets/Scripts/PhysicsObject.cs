@@ -25,7 +25,6 @@ public class PhysicsObject : MonoBehaviour
     void Start()
     {
         position = transform.position;
-
         direction = Random.insideUnitCircle.normalized;
     }
 

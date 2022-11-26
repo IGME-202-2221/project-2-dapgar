@@ -91,6 +91,7 @@ public class TagPlayer : Agent
         
         StayInBounds(stayInBoundsWeight);
         AvoidAllObstacles();
+        SpriteFlip();
     }
 
     public void StateTransition(TagState newState)
@@ -139,5 +140,17 @@ public class TagPlayer : Agent
     public void Tag()
     {
         StateTransition(TagState.Transforming);
+    }
+
+    public void SpriteFlip()
+    {
+        if (physicsObj.acceleration.x > 0)
+        {
+            transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        }
+        if (physicsObj.acceleration.x < 0)
+        {
+            transform.localScale = new Vector3(-1.5f, 1.5f, 1.5f);
+        }
     }
 }

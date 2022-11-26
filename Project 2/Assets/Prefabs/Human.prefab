@@ -165,4 +165,4 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1418695418805260220}
   infectedSprite: {fileID: 21300000, guid: 459c417a074ecf342af0e342c14e40a9, type: 3}
   humanSprite: {fileID: 21300000, guid: 56cc8d52a9ab3664d829a193cf0038b1, type: 3}
-  transformingSprite: {fileID: 21300000, guid: 9738eb933b58afd4395dc76f06be568c, type: 3}
+  transformingSprite: {fileID: 21300000, guid: 6dd056cf27171b04b8685f5dff9015f5, type: 3}

@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float moveSpeed = 4;
 
+    [SerializeField] SpriteRenderer spriteRenderer;
+
     float vertical;
     float horizontal;
 
@@ -18,6 +20,9 @@ public class PlayerController : MonoBehaviour
 
         // Assigns Vectors based on input values.
         GetInput();
+
+        // Handles sprite flipping.
+        FlipSprite();
 
         // Creates vector for movement.
         Vector3 move = new Vector3(horizontal, vertical, transform.position.z);
@@ -56,5 +61,17 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.position = vehiclePosition;
+    }
+
+    void FlipSprite()
+    {
+        if (horizontal > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        if (horizontal < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
     }
 }
