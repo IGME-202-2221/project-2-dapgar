@@ -19,13 +19,13 @@ _An attack on humans by the symbiotes! Find cures to free infected humans, use l
     -   _WASD keys / Arrow keys_
 -   _Use Antidote_
     -   _Left Click_
-    -   _Cures symbiotes, returning them to humans_
+        -   _Cures symbiotes, returning them to humans_
 
-## _Symbiote_
+## _States_
 
-_The most common enemy, luckily they cannot harm you if you are in a hazmat suit._
-
-### Infected
+_Various states of the symbiotes and humans_
+______________________________________________________________
+### _Infected_
 
 **Objective:** _Attack and infect the remaining humans._
 
@@ -40,6 +40,7 @@ _The most common enemy, luckily they cannot harm you if you are in a hazmat suit
 
 - _After transitioning to a symbiote._
 
+______________________________________________________________
 ### _Transitioning_
 
 **Objective:** _Transitioning to an infected (Frozen for x time)_
@@ -54,6 +55,7 @@ _The most common enemy, luckily they cannot harm you if you are in a hazmat suit
 
 - _When first infected by a symbiote._
    
+______________________________________________________________
 ### _Human_
 
 _Hopes to survive against the symbiotes._
@@ -70,7 +72,8 @@ _Hopes to survive against the symbiotes._
 #### State Transitions
 
 - _When either cured or by default._
-   
+
+______________________________________________________________
 ### _Curing_
 
 **Objective:** _Similar to transitioning, but returns symbiote into humans._
@@ -85,6 +88,7 @@ _Hopes to survive against the symbiotes._
 
 - _When hit with an antidote._
 
+______________________________________________________________
 ## Sources
 
 -   _Assets custom made by myself, Dominic Apgar_
