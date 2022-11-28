@@ -4,13 +4,13 @@ using UnityEngine;
 
 public enum TagState
 {
-    NotIt,
-    It,
-    Counting
+    Human,
+    Infected,
+    Transforming
 }
 public class TagPlayer : Agent
 {
-    TagState currentState = TagState.NotIt;
+    TagState currentState = TagState.Human;
     public TagState CurrentState => currentState;
 
     [SerializeField] float countForTime = 10f;
@@ -18,38 +18,42 @@ public class TagPlayer : Agent
 
     public float visionDistance = 4f;
 
+    public float stayInBoundsWeight = 6f;
+
     public SpriteRenderer spriteRenderer;
 
-    public Sprite itSprite;
-    public Sprite notitSprite;
-    public Sprite countingSprite;
+    public Sprite infectedSprite;
+    public Sprite humanSprite;
+    public Sprite transformingSprite;
 
     protected override void CalcSteeringForces()
     {
         switch (currentState)
         {
-            case TagState.NotIt:
+            case TagState.Human:
                 {
                     // Wander/Run away from It
-                    TagPlayer currentIt = AgentManager.Instance.currentItPlayer;
+                    List<TagPlayer> currentSymbiotes = AgentManager.Instance.currentSymbiotes;
 
-                    float distToItPlayer = Vector3.SqrMagnitude(physicsObj.position - currentIt.physicsObj.position);
-
-                    if (distToItPlayer < Mathf.Pow(visionDistance, 2))
+                    foreach (TagPlayer infected in currentSymbiotes)
                     {
-                        Flee(currentIt.physicsObj.position);
-                    }
-                    else
-                    {
-                        Wander();
-                    }
+                        float distToItPlayer = Vector3.SqrMagnitude(physicsObj.position - infected.physicsObj.position);
 
+                        if (distToItPlayer < Mathf.Pow(visionDistance, 2))
+                        {
+                            Flee(infected.physicsObj.position);
+                        }
+                        else
+                        {
+                            Wander();
+                        }
+                    }
                     Separate(AgentManager.Instance.agents);
 
                     break;
                 }
 
-            case TagState.It:
+            case TagState.Infected:
                 {
                     // Run towards nearest agent(not self)
                     // Get index to closest agent
@@ -61,57 +65,60 @@ public class TagPlayer : Agent
                         targetPlayer.Tag();
 
                         // Become not-it
-                        StateTransition(TagState.NotIt);
+                        // StateTransition(TagState.Human);
                     }
                     else
                     {
                         Seek(targetPlayer.physicsObj.position);
                     }
+                    Separate(AgentManager.Instance.currentSymbiotes);
 
                     break;
                 }
 
-            case TagState.Counting:
+            case TagState.Transforming:
                 {
                     // Count down to zero
                     timer -= Time.deltaTime;
 
                     if (timer <= 0)
                     {
-                        StateTransition(TagState.It);
+                        StateTransition(TagState.Infected);
                     }
                     break;
                 }
         }
         
-        StayInBounds(4f);
+        StayInBounds(stayInBoundsWeight);
+        AvoidAllObstacles();
+        SpriteFlip();
     }
 
     public void StateTransition(TagState newState)
     {
         switch(newState)
         {
-            case TagState.NotIt:
+            case TagState.Human:
                 {
-                    spriteRenderer.sprite = notitSprite;
+                    spriteRenderer.sprite = humanSprite;
                     break;
                 }
 
-            case TagState.It:
+            case TagState.Infected:
                 {
-                    spriteRenderer.sprite = itSprite;
+                    spriteRenderer.sprite = infectedSprite;
                     break;
                 }
 
-            case TagState.Counting:
+            case TagState.Transforming:
                 {
-                    spriteRenderer.sprite = countingSprite;
+                    spriteRenderer.sprite = transformingSprite;
 
                     Vector3 temp = transform.position;
                     transform.position = temp;
                     
                     timer = countForTime;
-                    AgentManager.Instance.currentItPlayer = this;
+                    AgentManager.Instance.currentSymbiotes.Add(this);
                     break;
                 }
         }
@@ -132,6 +139,18 @@ public class TagPlayer : Agent
 
     public void Tag()
     {
-        StateTransition(TagState.Counting);
+        StateTransition(TagState.Transforming);
+    }
+
+    public void SpriteFlip()
+    {
+        if (physicsObj.acceleration.x > 0)
+        {
+            transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        }
+        if (physicsObj.acceleration.x < 0)
+        {
+            transform.localScale = new Vector3(-1.5f, 1.5f, 1.5f);
+        }
     }
 }

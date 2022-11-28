@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1418695418805260222}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.016, z: 0}
+  m_LocalScale: {x: 0.31057, y: 0.31057, z: 0.31057}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1418695420676645871}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 418a4a23ffd89df4ba380aaa6925598d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 56cc8d52a9ab3664d829a193cf0038b1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1418695420676645870}
   - component: {fileID: 7389243128402789303}
   m_Layer: 0
-  m_Name: Greeny
+  m_Name: Human
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,8 +110,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1418695420676645857}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.0087286, z: 0}
+  m_LocalScale: {x: 1.5455077, y: 1.5455077, z: 1.5455077}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1418695418805260223}
@@ -134,10 +134,10 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
-  mass: 2
-  radius: 0.25
+  mass: 1
+  radius: 0.45
   useGravity: 0
-  useFriction: 1
+  useFriction: 0
   coeff: 0.7
   bounceOffWalls: 0
 --- !u!114 &7389243128402789303
@@ -153,14 +153,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   physicsObj: {fileID: 1418695420676645870}
-  maxSpeed: 3
+  maxSpeed: 1.5
   maxForce: 5
   maxWanderAngle: 45
-  maxWanderChangePerSecond: 5
-  personalSpace: 0.75
+  maxWanderChangePerSecond: 3
+  personalSpace: 1
+  visionRange: 2
   countForTime: 10
-  visionDistance: 6
+  visionDistance: 3
+  stayInBoundsWeight: 5
   spriteRenderer: {fileID: 1418695418805260220}
-  itSprite: {fileID: 21300000, guid: 7e7edead41a9c9d49ad8bf70b8afb4a2, type: 3}
-  notitSprite: {fileID: 21300000, guid: 418a4a23ffd89df4ba380aaa6925598d, type: 3}
-  countingSprite: {fileID: 21300000, guid: 9738eb933b58afd4395dc76f06be568c, type: 3}
+  infectedSprite: {fileID: 21300000, guid: 459c417a074ecf342af0e342c14e40a9, type: 3}
+  humanSprite: {fileID: 21300000, guid: 56cc8d52a9ab3664d829a193cf0038b1, type: 3}
+  transformingSprite: {fileID: 21300000, guid: 6dd056cf27171b04b8685f5dff9015f5, type: 3}

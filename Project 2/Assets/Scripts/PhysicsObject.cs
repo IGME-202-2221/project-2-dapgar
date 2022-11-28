@@ -8,7 +8,8 @@ public class PhysicsObject : MonoBehaviour
     public Vector3 velocity = Vector3.zero;
     public Vector3 acceleration = Vector3.zero;
     public Vector3 position = Vector3.zero;
-    
+    public Vector3 right => transform.right;
+
     [SerializeField] float mass = 1f;
     [SerializeField] public float radius;
 
@@ -24,7 +25,6 @@ public class PhysicsObject : MonoBehaviour
     void Start()
     {
         position = transform.position;
-
         direction = Random.insideUnitCircle.normalized;
     }
 
@@ -62,7 +62,7 @@ public class PhysicsObject : MonoBehaviour
         acceleration = Vector3.zero;
 
         // Handle rotation
-        transform.rotation = Quaternion.LookRotation(Vector3.back, direction);
+        //transform.rotation = Quaternion.LookRotation(Vector3.back, direction);
     }
 
     public void ApplyForce(Vector3 force)

@@ -1,4 +1,4 @@
-# Project _NAME_
+# Project _Symbiote Invasion_
 
 [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet)
 
@@ -11,92 +11,98 @@ _REPLACE OR REMOVE EVERYTING BETWEEN "\_"_
 
 ## Simulation Design
 
-_A brief explanation of your simulation._
+_An attack on humans by the symbiotes! Find cures to free infected humans, use loud sound to stun the symbiotes, and most of all, survive!_
 
 ### Controls
 
--   _List all of the actions the player can have in your simulation_
-    -   _Include how to preform each action ( keyboard, mouse, UI Input )_
-    -   _Include what impact an action has in the simulation ( if is could be unclear )_
+-   _Movement_
+    -   _WASD keys / Arrow keys_
+-   _Use Antidote_
+    -   _Left Click_
+        -   _Cures symbiotes, returning them to humans_
 
-## _Agent 1 Name_
+## _States_
 
-_A brief explanation of this agent._
+_Various states of the symbiotes and humans_
+______________________________________________________________
+### _Infected_
 
-### _State 1 Name_
-
-**Objective:** _A brief explanation of this state's objective._
-
-#### Steering Behaviors
-
-- _List all behaviors used by this state_
-   - _If behavior has input data list it here_
-   - _eg, Flee - nearest Agent2_
-- Obstacles - _List all obstacle types this state avoids_
-- Seperation - _List all agents this state seperates from_
-   
-#### State Transistions
-
-- _List all the ways this agent can transition to this state_
-   - _eg, When this agent gets within range of Agent2_
-   - _eg, When this agent has reached target of State2_
-   
-### _State 2 Name_
-
-**Objective:** _A brief explanation of this state's objective._
+**Objective:** _Attack and infect the remaining humans._
 
 #### Steering Behaviors
 
-- _List all behaviors used by this state_
-- Obstacles - _List all obstacle types this state avoids_
-- Seperation - _List all agents this state seperates from_
+- _Seek_
+    - _Nearest Human_
+- Obstacles - _Walls, Obstacles_
+- Seperation - _Other Symbiotes_
    
-#### State Transistions
+#### State Transitions
 
-- _List all the ways this agent can transition to this state_
+- _After transitioning to a symbiote._
 
-## _Agent 2 Name_
+______________________________________________________________
+### _Transitioning_
 
-_A brief explanation of this agent._
-
-### _State 1 Name_
-
-**Objective:** _A brief explanation of this state's objective._
+**Objective:** _Transitioning to an infected (Frozen for x time)_
 
 #### Steering Behaviors
 
-- _List all behaviors used by this state_
-- Obstacles - _List all obstacle types this state avoids_
-- Seperation - _List all agents this state seperates from_
+- Separate
+- Obstacles - _Walls, Obstacles_
+- Separation - _Symbiotes, Humans_
    
-#### State Transistions
+#### State Transitions
 
-- _List all the ways this agent can transition to this state_
+- _When first infected by a symbiote._
    
-### _State 2 Name_
+______________________________________________________________
+### _Human_
 
-**Objective:** _A brief explanation of this state's objective._
+_Hopes to survive against the symbiotes._
+
+**Objective:** _To flee away and survive the symbiotes._
 
 #### Steering Behaviors
 
-- _List all behaviors used by this state_
-- Obstacles - _List all obstacle types this state avoids_
-- Seperation - _List all agents this state seperates from_
+- _Flee_
+    - _Nearest Symbiote_
+- Obstacles - _Walls_
+- Separation - _Humans_
    
-#### State Transistions
+#### State Transitions
 
-- _List all the ways this agent can transition to this state_
+- _When either cured or by default._
 
+______________________________________________________________
+### _Curing_
+
+**Objective:** _Similar to transitioning, but returns symbiote into humans._
+
+#### Steering Behaviors
+
+- _Separate_
+- Obstacles - _Walls, Obstacles_
+- Separation - _Humans, Symbiotes_
+   
+#### State Transitions
+
+- _When hit with an antidote._
+
+______________________________________________________________
 ## Sources
 
--   _List all project sources here –models, textures, sound clips, assets, etc._
--   _If an asset is from the Unity store, include a link to the page and the author’s name_
+-   _Assets custom made by myself, Dominic Apgar_
 
 ## Make it Your Own
 
 - _List out what you added to your game to make it different for you_
-- _If you will add more agents or states make sure to list here and add it to the documention above_
-- _If you will add your own assets make sure to list it here and add it to the Sources section
+- _Player agent_
+    - _Controllable agent_
+    - _Collect's cures to use on symbiotes_
+- _Time-based (Survive 2mins to win etc.)_
+- _Custom assets/art_
+- _Twist on zombie-like survival_
+- _Custom steering behaviors_
 
 ## Known Issues
 
