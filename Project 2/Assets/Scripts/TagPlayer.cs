@@ -26,12 +26,16 @@ public class TagPlayer : Agent
     public Sprite humanSprite;
     public Sprite transformingSprite;
 
+    public bool infectable = false;
+
     protected override void CalcSteeringForces()
     {
         switch (currentState)
         {
             case TagState.Human:
                 {
+                    infectable = true;
+
                     // Wander/Run away from It
                     List<TagPlayer> currentSymbiotes = AgentManager.Instance.currentSymbiotes;
 
@@ -55,6 +59,8 @@ public class TagPlayer : Agent
 
             case TagState.Infected:
                 {
+                    infectable = false;
+
                     // Run towards nearest agent(not self)
                     // Get index to closest agent
                     TagPlayer targetPlayer = AgentManager.Instance.GetClosestTagPlayer(this);
@@ -78,6 +84,8 @@ public class TagPlayer : Agent
 
             case TagState.Transforming:
                 {
+                    infectable = false;
+
                     // Count down to zero
                     timer -= Time.deltaTime;
 
@@ -100,6 +108,8 @@ public class TagPlayer : Agent
         {
             case TagState.Human:
                 {
+                    infectable = true;
+
                     spriteRenderer.sprite = humanSprite;
                     AgentManager.Instance.currentSymbiotes.Remove(this);
                     break;
@@ -107,12 +117,16 @@ public class TagPlayer : Agent
 
             case TagState.Infected:
                 {
+                    infectable = false;
+
                     spriteRenderer.sprite = infectedSprite;
                     break;
                 }
 
             case TagState.Transforming:
                 {
+                    infectable = false;
+
                     spriteRenderer.sprite = transformingSprite;
 
                     Vector3 temp = transform.position;
@@ -150,11 +164,11 @@ public class TagPlayer : Agent
 
     public void SpriteFlip()
     {
-        if (physicsObj.acceleration.x > 0)
+        if (physicsObj.velocity.x > 0)
         {
             transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         }
-        if (physicsObj.acceleration.x < 0)
+        if (physicsObj.velocity.x < 0)
         {
             transform.localScale = new Vector3(-1.5f, 1.5f, 1.5f);
         }

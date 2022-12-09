@@ -20,6 +20,8 @@ public abstract class Agent : MonoBehaviour
 
     public float visionRange = 2f;
 
+    public float futureTime = 1f;
+
     protected abstract void CalcSteeringForces();
 
     private void Awake()
@@ -98,7 +100,7 @@ public abstract class Agent : MonoBehaviour
     protected void StayInBounds(float weight = 1f)
     {
         // Get position
-        Vector3 futurePosition = GetFuturePosition();
+        Vector3 futurePosition = GetFuturePosition(futureTime);
 
         // Check position
         if (futurePosition.x > AgentManager.Instance.maxPosition.x ||

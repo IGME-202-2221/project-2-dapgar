@@ -62,6 +62,7 @@ public class AgentManager : MonoBehaviour
         }
 
         agents[3].GetComponent<TagPlayer>().Tag();
+        agents[2].GetComponent<TagPlayer>().Tag();
     }
 
     private void Update()
@@ -70,14 +71,9 @@ public class AgentManager : MonoBehaviour
 
         if (timer <= 0)
         {
-            Vector3 rand = new Vector3(
-            Random.Range(AgentManager.Instance.camWidth, -AgentManager.Instance.camWidth),
-            Random.Range(AgentManager.Instance.camHeight, -AgentManager.Instance.camHeight));
-
             int randIndex = Random.Range(0, agents.Count);
 
-            if (agents[randIndex].GetComponent<TagPlayer>().CurrentState != TagState.Infected ||
-                agents[randIndex].GetComponent<TagPlayer>().CurrentState != TagState.Transforming)
+            if (agents[randIndex].GetComponent<TagPlayer>().infectable)
             {
                 agents[randIndex].GetComponent<TagPlayer>().Tag();
             }

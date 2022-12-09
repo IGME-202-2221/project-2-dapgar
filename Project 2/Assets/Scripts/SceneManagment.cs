@@ -21,8 +21,14 @@ public class SceneManagment : MonoBehaviour
     }
 
     // Loads End Scene
-    public void ToEndScene()
+    public void ToLoseScene()
     {
         SceneManager.LoadScene(2);
+    }
+
+    // Loads Win Scene
+    public void ToWinScene()
+    {
+        SceneManager.LoadScene(3);
     }
 }

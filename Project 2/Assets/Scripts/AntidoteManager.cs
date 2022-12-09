@@ -33,8 +33,8 @@ public class AntidoteManager : MonoBehaviour
             if (timer <= 0)
             {
                 Vector3 rand = new Vector3(
-                Random.Range(AgentManager.Instance.camWidth, -AgentManager.Instance.camWidth),
-                Random.Range(AgentManager.Instance.camHeight, -AgentManager.Instance.camHeight));
+                Random.Range(AgentManager.Instance.maxPosition.x, -AgentManager.Instance.maxPosition.x),
+                Random.Range(AgentManager.Instance.maxPosition.y, -AgentManager.Instance.maxPosition.y));
 
                 antidote = Instantiate(antidotePF, rand, Quaternion.identity);
                 timer = countForTime;

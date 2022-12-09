@@ -61,6 +61,9 @@ public class PhysicsObject : MonoBehaviour
         // Zero out acceleration
         acceleration = Vector3.zero;
 
+        // Handle Sprite Flipping
+        
+
         // Handle rotation
         //transform.rotation = Quaternion.LookRotation(Vector3.back, direction);
     }

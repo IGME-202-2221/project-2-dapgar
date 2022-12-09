@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class Antidote : MonoBehaviour
 {
-    public float radius = 0.5f;
+    public float radius = 0.25f;
+   
 }
