@@ -6,6 +6,8 @@ public class AntidoteManager : MonoBehaviour
 {
     public static AntidoteManager Instance;
 
+    public PlayerController controller;
+
     public GameObject antidotePF;
     public GameObject antidote = null;
 
@@ -24,7 +26,7 @@ public class AntidoteManager : MonoBehaviour
 
     private void Update()
     {
-        if (antidote == null)
+        if (antidote == null && !controller.hasAntidote)
         {
             timer -= Time.deltaTime;
 

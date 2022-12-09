@@ -25,6 +25,8 @@ public class AgentManager : MonoBehaviour
     public float edgePadding = 0.3f;
 
     public List<TagPlayer> currentSymbiotes = new List<TagPlayer>();
+    public float countForTime = 10f;
+    public float timer = 0f;
 
     private void Awake()
     {
@@ -62,6 +64,28 @@ public class AgentManager : MonoBehaviour
         agents[3].GetComponent<TagPlayer>().Tag();
     }
 
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+
+        if (timer <= 0)
+        {
+            Vector3 rand = new Vector3(
+            Random.Range(AgentManager.Instance.camWidth, -AgentManager.Instance.camWidth),
+            Random.Range(AgentManager.Instance.camHeight, -AgentManager.Instance.camHeight));
+
+            int randIndex = Random.Range(0, agents.Count);
+
+            if (agents[randIndex].GetComponent<TagPlayer>().CurrentState != TagState.Infected ||
+                agents[randIndex].GetComponent<TagPlayer>().CurrentState != TagState.Transforming)
+            {
+                agents[randIndex].GetComponent<TagPlayer>().Tag();
+            }
+
+            timer = countForTime;
+        }
+    }
+
     public TagPlayer GetClosestTagPlayer(TagPlayer sourcePlayer)
     {
         float minDistance = float.MaxValue;
@@ -71,7 +95,7 @@ public class AgentManager : MonoBehaviour
         {
             float sqrDistance = Vector3.SqrMagnitude(sourcePlayer.physicsObj.position - other.physicsObj.position);
 
-            if (sqrDistance < float.Epsilon || 
+            if (sqrDistance < float.Epsilon ||
                 other.GetComponent<TagPlayer>().CurrentState == TagState.Infected ||
                 other.GetComponent<TagPlayer>().CurrentState == TagState.Transforming)
             {

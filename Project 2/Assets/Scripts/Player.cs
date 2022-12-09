@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float radius = 0.25f;
+    public PlayerController controller;
 
+    public float radius = 0.25f;
 
     // Update is called once per frame
     private void Update()
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
             if (IsTouching(AntidoteManager.Instance.antidote))
             {
                 Destroy(AntidoteManager.Instance.antidote);
+                controller.hasAntidote = true;
             }
         }
     }

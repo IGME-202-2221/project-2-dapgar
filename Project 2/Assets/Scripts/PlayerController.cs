@@ -10,12 +10,25 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] SpriteRenderer spriteRenderer;
 
+    [SerializeField] ParticleSystem particles;
+
     float vertical;
     float horizontal;
+
+    public bool hasAntidote = false;
 
     // Update is called once per frame
     void Update()
     {
+        // Antidode Usage
+        if (UseAntidote() && hasAntidote)
+        {
+            particles.Play();
+            hasAntidote = false;
+            CheckHits();
+        }
+
+        // Handles Cam walls
         CamWalls();
 
         // Assigns Vectors based on input values.
@@ -72,6 +85,34 @@ public class PlayerController : MonoBehaviour
         if (horizontal < 0)
         {
             spriteRenderer.flipX = true;
+        }
+    }
+
+    bool UseAntidote()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    void CheckHits()
+    {
+        float hitRadius = particles.shape.radius;
+
+        foreach(Agent agent in AgentManager.Instance.agents)
+        {
+            float sqrDistance = Vector3.SqrMagnitude(transform.position - agent.transform.position);
+
+            float sqrRadii = Mathf.Pow(hitRadius, 2) + Mathf.Pow(agent.physicsObj.radius, 2);
+
+            // Returns boolean
+            if (sqrDistance < sqrRadii)
+            {
+                agent.GetComponent<TagPlayer>().Cure();
+            }
         }
     }
 }

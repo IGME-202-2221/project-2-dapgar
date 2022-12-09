@@ -154,14 +154,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicsObj: {fileID: 1418695420676645870}
   maxSpeed: 1.5
-  maxForce: 5
+  maxForce: 15
   maxWanderAngle: 45
   maxWanderChangePerSecond: 3
   personalSpace: 1
   visionRange: 2
-  countForTime: 10
+  countForTime: 8
   visionDistance: 3
-  stayInBoundsWeight: 5
+  stayInBoundsWeight: 8
   spriteRenderer: {fileID: 1418695418805260220}
   infectedSprite: {fileID: 21300000, guid: 459c417a074ecf342af0e342c14e40a9, type: 3}
   humanSprite: {fileID: 21300000, guid: 56cc8d52a9ab3664d829a193cf0038b1, type: 3}

@@ -101,6 +101,7 @@ public class TagPlayer : Agent
             case TagState.Human:
                 {
                     spriteRenderer.sprite = humanSprite;
+                    AgentManager.Instance.currentSymbiotes.Remove(this);
                     break;
                 }
 
@@ -140,6 +141,11 @@ public class TagPlayer : Agent
     public void Tag()
     {
         StateTransition(TagState.Transforming);
+    }
+
+    public void Cure()
+    {
+        StateTransition(TagState.Human);
     }
 
     public void SpriteFlip()
