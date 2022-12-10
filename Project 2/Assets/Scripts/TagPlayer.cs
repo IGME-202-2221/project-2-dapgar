@@ -63,7 +63,7 @@ public class TagPlayer : Agent
 
                     // Run towards nearest agent(not self)
                     // Get index to closest agent
-                    TagPlayer targetPlayer = AgentManager.Instance.GetClosestTagPlayer(this);
+                    TagPlayer targetPlayer = AgentManager.Instance.GetClosestTagPlayer(this).GetComponent<TagPlayer>();
 
                     if (IsTouching(targetPlayer))
                     {

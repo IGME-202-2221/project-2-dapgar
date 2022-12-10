@@ -67,18 +67,21 @@ public class AgentManager : MonoBehaviour
 
     private void Update()
     {
-        timer -= Time.deltaTime;
-
-        if (timer <= 0)
+        if (currentSymbiotes.Count < 3)
         {
-            int randIndex = Random.Range(0, agents.Count);
+            timer -= Time.deltaTime;
 
-            if (agents[randIndex].GetComponent<TagPlayer>().infectable)
+            if (timer <= 0)
             {
-                agents[randIndex].GetComponent<TagPlayer>().Tag();
-            }
+                int randIndex = Random.Range(0, agents.Count);
 
-            timer = countForTime;
+                if (agents[randIndex].GetComponent<TagPlayer>().infectable)
+                {
+                    agents[randIndex].GetComponent<TagPlayer>().Tag();
+                }
+
+                timer = countForTime;
+            }
         }
     }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public PlayerController controller;
+    public SpriteRenderer spriteRenderer;
 
     public float radius = 0.25f;
 
