@@ -33,7 +33,6 @@ public class Timer : MonoBehaviour
                 timerOn = false;
             }
         }
-
     }
 
     void DisplayTime(float time)
