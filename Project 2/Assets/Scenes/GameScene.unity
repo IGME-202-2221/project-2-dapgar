@@ -2058,7 +2058,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.066037714, g: 0.066037714, b: 0.066037714, a: 1}
   m_FlipX: 0
@@ -2159,6 +2159,10 @@ PrefabInstance:
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 1011042040}
+    - target: {fileID: 5678852884144210934, guid: 407aa37a285a26e47ab9ca04eec72aab, type: 3}
+      propertyPath: m_SortingOrder
+      value: 501
+      objectReference: {fileID: 0}
     - target: {fileID: 8229098732524738072, guid: 407aa37a285a26e47ab9ca04eec72aab, type: 3}
       propertyPath: camWalls
       value: 
@@ -2210,6 +2214,10 @@ PrefabInstance:
     - target: {fileID: 8229098732524738075, guid: 407aa37a285a26e47ab9ca04eec72aab, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229098733649371736, guid: 407aa37a285a26e47ab9ca04eec72aab, type: 3}
+      propertyPath: m_SortingOrder
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 8398987985580254695, guid: 407aa37a285a26e47ab9ca04eec72aab, type: 3}
       propertyPath: ShapeModule.angle
