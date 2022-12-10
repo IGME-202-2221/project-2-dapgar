@@ -2,8 +2,6 @@
 
 [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet)
 
-_REPLACE OR REMOVE EVERYTING BETWEEN "\_"_
-
 ### Student Info
 
 -   Name: _Dominic Apgar_
@@ -66,7 +64,7 @@ _Hopes to survive against the symbiotes._
 
 - _Flee_
     - _Nearest Symbiote_
-- Obstacles - _Walls_
+- Obstacles - _Walls, Obstacles_
 - Separation - _Humans_
    
 #### State Transitions
@@ -80,7 +78,7 @@ ______________________________________________________________
 
 #### Steering Behaviors
 
-- _Separate_
+- Separate
 - Obstacles - _Walls, Obstacles_
 - Separation - _Humans, Symbiotes_
    
@@ -110,5 +108,5 @@ _List any errors, lack of error checking, or specific information that I need to
 
 ### Requirements not completed
 
-_If you did not complete a project requirement, notate that here_
+_Lacking an extra agent, as I combined them into one agent since I wanted fluid transitions between them._
 
